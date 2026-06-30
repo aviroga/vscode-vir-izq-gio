@@ -4,11 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as vscode from 'vscode';
+import { generateReport } from './command';
 
 export function activate(context: vscode.ExtensionContext): void {
 	context.subscriptions.push(
 		vscode.commands.registerCommand('prPrioritizer.generateReport', () => {
-			vscode.window.showInformationMessage('PR Prioritizer: not implemented yet');
+			generateReport();
 		})
 	);
 }
