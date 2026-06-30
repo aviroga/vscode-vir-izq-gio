@@ -9,7 +9,7 @@ Approach: ship it as a **built-in extension** at `extensions/pr-prioritizer/`, m
 **Decisions already made:**
 - Duplicate the core modules into the extension (adapted from ESM to the CJS convention every built-in extension uses) rather than sharing a package across `pr-prioritizer/` and `extensions/`. `pr-prioritizer/` stays untouched as the offline/batch CLI.
 - The command auto-detects the target repo from the active workspace's git remote (via the `vscode.git` extension API), falling back to a manual `owner/repo` input box.
-- The plan is split into **6 independently assignable stages** (2 per person across 3 people).
+- The plan is split into **6 stages**, done **sequentially** (not in parallel) by 3 people, 2 consecutive stages each, in this handoff order: **aviroga → juaniz2001 → Giovanelli18**.
 
 Final layout once all 6 stages land:
 
@@ -124,10 +124,17 @@ extensions/pr-prioritizer/
 
 ---
 
-## Suggested split (adjust freely to who's available for what)
-- **You (2 stages):** Stage 1 (scaffolding/build-wiring) + Stage 5 (orchestration) — these touch the most cross-cutting/integration surface
-- **Collaborator A (2 stages):** Stage 2 (core port) + Stage 6 (tests/polish) — natural pairing since they own the same files
-- **Collaborator B (2 stages):** Stage 3 (auth) + Stage 4 (repo detection) — both small, self-contained, parallelizable VS Code API integrations
+## Execution order (sequential handoff, not parallel)
+
+| Order | Owner | Stages | Hands off when... |
+| --- | --- | --- | --- |
+| 1 | **aviroga** | Stage 0 (this doc) + Stage 1 (scaffolding/build-wiring) + Stage 2 (core port) | `gulp compile-extension:pr-prioritizer` succeeds and `core/` type-checks clean |
+| 2 | **juaniz2001** | Stage 3 (GitHub auth) + Stage 4 (repo auto-detection) | both `auth.ts` and `repo.ts` work standalone per their Verify sections |
+| 3 | **Giovanelli18** | Stage 5 (command orchestration) + Stage 6 (tests + final e2e verification) | full checklist in Stage 6 passes |
+
+This grouping (1-2 / 3-4 / 5-6) follows the dependency chain exactly, so each person finishes their full tramo and pushes before the next one starts — no one needs to wait mid-stage for someone else's unfinished work.
+
+Each person should push their 2 stages as their own commit(s) on `feature/pr-prioritizer` before notifying the next person to start, to keep the handoff clean and avoid merge conflicts on shared files (`package.json`, `extension.ts`).
 
 ## Out of scope for this pass
 - Browser/web target
