@@ -1,0 +1,9 @@
+{
+	"displayName": "PR Prioritizer",
+	"description": "Generate a prioritized report of review-ready external pull requests.",
+	"command.generateReport": "Generate Report",
+	"command.category": "PR Prioritizer",
+	"config.title": "PR Prioritizer",
+	"config.limit": "Maximum number of open pull requests to fetch from the GitHub API.",
+	"config.top": "Maximum number of ranked pull requests to include in the generated report."
+}
