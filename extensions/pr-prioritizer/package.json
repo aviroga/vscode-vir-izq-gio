@@ -1,0 +1,62 @@
+{
+  "name": "pr-prioritizer",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "publisher": "vscode",
+  "license": "MIT",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.5.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "capabilities": {
+    "virtualWorkspaces": false,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "activationEvents": [
+    "onCommand:prPrioritizer.generateReport"
+  ],
+  "main": "./out/extension",
+  "scripts": {
+    "compile": "gulp compile-extension:pr-prioritizer",
+    "watch": "gulp watch-extension:pr-prioritizer"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "prPrioritizer.generateReport",
+        "title": "%command.generateReport%",
+        "category": "%command.category%"
+      }
+    ],
+    "configuration": {
+      "title": "%config.title%",
+      "properties": {
+        "prPrioritizer.limit": {
+          "type": "number",
+          "default": 50,
+          "description": "%config.limit%"
+        },
+        "prPrioritizer.top": {
+          "type": "number",
+          "default": 25,
+          "description": "%config.top%"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@octokit/rest": "21.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/vscode.git"
+  }
+}
