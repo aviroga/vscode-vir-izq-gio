@@ -143,6 +143,22 @@
 		{
 			"type": "extensionHost",
 			"request": "launch",
+			"name": "PR Prioritizer",
+			"runtimeExecutable": "${execPath}",
+			"args": [
+				"--extensionDevelopmentPath=${workspaceFolder}/extensions/pr-prioritizer"
+			],
+			"outFiles": [
+				"${workspaceFolder}/extensions/pr-prioritizer/out/**/*.js"
+			],
+			"presentation": {
+				"group": "5_tests",
+				"order": 99
+			}
+		},
+		{
+			"type": "extensionHost",
+			"request": "launch",
 			"name": "VS Code Github Tests",
 			"runtimeExecutable": "${execPath}",
 			"args": [
